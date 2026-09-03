@@ -18,19 +18,20 @@
   {
     "name": "Colors",
     "settings": [
-      { "type": "color", "id": "color_bg", "label": "Background", "default": "#0e0c0a" },
-      { "type": "color", "id": "color_surface", "label": "Surface", "default": "#161310" },
-      { "type": "color", "id": "color_text", "label": "Text", "default": "#f0ebe3" },
-      { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#9a8f82" },
-      { "type": "color", "id": "color_accent", "label": "Accent (gold)", "default": "#c9a96e" },
-      { "type": "color", "id": "color_border", "label": "Border", "default": "#2e2820" }
+      { "type": "color", "id": "color_bg",        "label": "Background",     "default": "#0C0C0C" },
+      { "type": "color", "id": "color_surface",   "label": "Surface",        "default": "#111111" },
+      { "type": "color", "id": "color_surface_2", "label": "Surface 2",      "default": "#161616" },
+      { "type": "color", "id": "color_text",      "label": "Text",           "default": "#E5E5E5" },
+      { "type": "color", "id": "color_muted",     "label": "Muted text",     "default": "#888888" },
+      { "type": "color", "id": "color_accent",    "label": "Accent (gold)",  "default": "#C5A880" },
+      { "type": "color", "id": "color_accent_dk", "label": "Accent dark",    "default": "#A8845A" }
     ]
   },
   {
     "name": "Typography",
     "settings": [
-      { "type": "font_picker", "id": "font_heading", "label": "Heading font", "default": "cormorant_garamond_n4" },
-      { "type": "font_picker", "id": "font_body", "label": "Body font", "default": "jost_n3" }
+      { "type": "font_picker", "id": "font_heading", "label": "Heading font", "default": "playfair_display_n4" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font", "default": "lato_n4" }
     ]
   },
   {
@@ -41,7 +42,7 @@
       { "type": "text", "id": "address_country", "label": "Country", "default": "USA" },
       { "type": "text", "id": "phone", "label": "Phone", "default": "[RESTAURANT PHONE]" },
       { "type": "text", "id": "email", "label": "Email", "default": "[RESTAURANT EMAIL]" },
-      { "type": "text", "id": "map_url", "label": "Google Maps embed URL", "default": "" }
+      { "type": "text", "id": "map_url", "label": "Google Maps embed URL", "info": "Paste your Google Maps embed URL here" }
     ]
   },
   {

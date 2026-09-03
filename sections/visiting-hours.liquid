@@ -1,5 +1,5 @@
 <style>
-.visiting-hours { background: var(--color-surface); }
+.visiting-hours { background: var(--color-bg); }
 .hours-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -19,7 +19,7 @@
 .hours-image-placeholder {
   width: 100%;
   aspect-ratio: 4/5;
-  background: var(--color-surface-2);
+  background: var(--color-cream);
 }
 .hours-content .eyebrow { margin-bottom: 0.75rem; }
 .hours-content .section-title { margin-bottom: 2rem; }
@@ -30,17 +30,16 @@
   padding: 0.85rem 0;
   font-size: 0.92rem;
 }
-.hours-table .day-name { color: var(--color-text); font-weight: 400; }
+.hours-table .day-name { color: var(--color-dark); font-weight: 400; }
 .hours-table .day-hours { color: var(--color-muted); text-align: right; }
 .hours-table .closed { color: var(--color-muted); opacity: 0.6; }
 .hours-notice {
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
-  background: rgba(201,169,110,0.08);
+  background: rgba(164,119,69,0.07);
   border-left: 2px solid var(--color-accent);
   font-size: 0.85rem;
   color: var(--color-muted);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 @media (max-width: 768px) {

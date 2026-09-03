@@ -1,71 +1,92 @@
 <style>
-.about-section { background: var(--color-surface); }
+.about-section { background: var(--color-bg); padding-block: var(--sp-xl); }
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  grid-template-columns: 45fr 55fr;
+  gap: 6rem;
   align-items: center;
 }
 .about-grid--reverse .about-images { order: 2; }
-.about-grid--reverse .about-text { order: 1; }
-.about-images { position: relative; }
+.about-grid--reverse .about-text   { order: 1; }
+
+/* Overlapping image stack */
+.about-images {
+  position: relative;
+  padding-bottom: 4rem;
+  padding-right: 3rem;
+}
 .about-img-main {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  border-radius: var(--radius-md);
+  display: block;
 }
+.about-img-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--color-surface); }
 .about-img-secondary {
   position: absolute;
-  bottom: -2.5rem;
-  right: -2rem;
+  bottom: 0;
+  right: 0;
   width: 55%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  border: 4px solid var(--color-bg);
+  border: 5px solid var(--color-bg);
   box-shadow: var(--shadow-md);
 }
-.about-text .eyebrow { margin-bottom: 0.75rem; }
-.about-text .section-title { margin-bottom: 1.5rem; }
-.about-text p {
-  color: var(--color-muted);
-  font-size: 1rem;
-  line-height: 1.9;
-  margin-bottom: 1rem;
+.about-img-accent-dot {
+  position: absolute;
+  top: -1.5rem;
+  left: -1.5rem;
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(197,168,128,0.2);
+  border-radius: 50%;
+  pointer-events: none;
 }
-.about-text .btn { margin-top: 1rem; }
+
+.about-text .eyebrow { margin-bottom: 0.85rem; }
+.about-text .section-title { margin-bottom: 1.5rem; }
+.about-text p { color: var(--color-muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1rem; }
+.about-text .btn { margin-top: 1.5rem; }
 .about-stat-row {
   display: flex;
   gap: 2.5rem;
-  margin: 2rem 0;
-  padding: 1.5rem 0;
+  margin: 2.5rem 0;
+  padding: 1.75rem 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 .about-stat strong {
   display: block;
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 2.4rem;
+  font-style: italic;
   color: var(--color-accent);
   line-height: 1;
 }
 .about-stat span {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-muted);
+  margin-top: 0.3rem;
+  display: block;
+}
+/* Gold accent line above heading */
+.about-text__accent-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--color-accent);
+  margin-bottom: 1.5rem;
 }
 
-@media (max-width: 1024px) {
-  .about-grid { gap: 3rem; }
-  .about-img-secondary { right: -1rem; }
-}
+@media (max-width: 1024px) { .about-grid { gap: 3.5rem; } }
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .about-grid--reverse .about-images { order: 0; }
+  .about-grid--reverse .about-images,
   .about-grid--reverse .about-text { order: 0; }
-  .about-img-secondary { width: 45%; bottom: -1.5rem; right: 0; }
+  .about-images { padding-bottom: 3rem; padding-right: 2rem; }
+  .about-img-secondary { width: 48%; }
   .about-stat-row { gap: 1.5rem; }
 }
 </style>
@@ -73,41 +94,26 @@
 <section class="about-section" id="about">
   <div class="container">
     <div class="about-grid{% if section.settings.image_position == 'right' %} about-grid--reverse{% endif %}">
-
-      <!-- Images -->
       <div class="about-images fade-in">
         {%- if section.settings.image != blank -%}
-          <img
-            class="about-img-main"
-            src="{{ section.settings.image | image_url: width: 800 }}"
-            alt="{{ section.settings.image.alt | default: 'About Megan The Restaurant' }}"
-            loading="lazy"
-            width="800"
-          >
+          <img class="about-img-main" src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image.alt | default: 'About Megan The Restaurant' }}" loading="lazy" width="800">
         {%- else -%}
-          <div class="about-img-main" style="background: var(--color-surface-2);"></div>
+          <div class="about-img-placeholder"></div>
         {%- endif -%}
         {%- if section.settings.image_secondary != blank -%}
-          <img
-            class="about-img-secondary"
-            src="{{ section.settings.image_secondary | image_url: width: 400 }}"
-            alt="{{ section.settings.image_secondary.alt | default: '' }}"
-            loading="lazy"
-            width="400"
-          >
+          <img class="about-img-secondary" src="{{ section.settings.image_secondary | image_url: width: 400 }}" alt="{{ section.settings.image_secondary.alt | default: '' }}" loading="lazy" width="400">
         {%- endif -%}
+        <div class="about-img-accent-dot" aria-hidden="true"></div>
       </div>
-
-      <!-- Text -->
       <div class="about-text">
         {%- if section.settings.eyebrow != blank -%}
           <p class="eyebrow fade-up">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
+        <span class="about-text__accent-line fade-up"></span>
         <h2 class="section-title fade-up">{{ section.settings.heading | default: 'More Than Just A Meal' }}</h2>
         {%- if section.settings.description != blank -%}
           <div class="fade-up">{{ section.settings.description }}</div>
         {%- endif -%}
-
         {%- if section.settings.show_stats -%}
           <div class="about-stat-row fade-up">
             {%- for block in section.blocks -%}
@@ -120,14 +126,12 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
         {%- if section.settings.btn_text != blank -%}
           <a href="{{ section.settings.btn_url | default: '/pages/about' }}" class="btn btn--outline fade-up">
-            {{ section.settings.btn_text }}
+            {{ section.settings.btn_text }} &rarr;
           </a>
         {%- endif -%}
       </div>
-
     </div>
   </div>
 </section>
@@ -136,33 +140,27 @@
 {
   "name": "About",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A Place to Gather" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "More Than Just A Meal" },
-    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Megan The Restaurant brings together exceptional food, welcoming hospitality and an atmosphere designed for memorable moments.</p>" },
-    { "type": "image_picker", "id": "image", "label": "Main image" },
-    { "type": "image_picker", "id": "image_secondary", "label": "Secondary image (optional)" },
-    { "type": "select", "id": "image_position", "label": "Image position", "options": [{"value":"left","label":"Left"},{"value":"right","label":"Right"}], "default": "left" },
-    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Our Story" },
-    { "type": "url", "id": "btn_url", "label": "Button URL" },
-    { "type": "checkbox", "id": "show_stats", "label": "Show stats", "default": true }
+    { "type": "text",         "id": "eyebrow",        "label": "Eyebrow",         "default": "Our Story" },
+    { "type": "text",         "id": "heading",        "label": "Heading",         "default": "We Are Locally Crafted Food & Wine Serving Since 1978" },
+    { "type": "richtext",     "id": "description",    "label": "Description",     "default": "<p>Megan The Restaurant brings together exceptional food, welcoming hospitality and an atmosphere designed for memorable moments.</p>" },
+    { "type": "image_picker", "id": "image",          "label": "Main image" },
+    { "type": "image_picker", "id": "image_secondary","label": "Secondary image" },
+    { "type": "select",       "id": "image_position", "label": "Image position",  "options": [{"value":"left","label":"Left"},{"value":"right","label":"Right"}], "default": "left" },
+    { "type": "text",         "id": "btn_text",       "label": "Button text",     "default": "Discover Our Story" },
+    { "type": "url",          "id": "btn_url",        "label": "Button URL" },
+    { "type": "checkbox",     "id": "show_stats",     "label": "Show stats",      "default": true }
   ],
-  "blocks": [
-    {
-      "type": "stat",
-      "name": "Stat",
-      "settings": [
-        { "type": "text", "id": "value", "label": "Value", "default": "10+" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Years of Excellence" }
-      ]
-    }
-  ],
-  "presets": [{
-    "name": "About",
-    "blocks": [
-      { "type": "stat", "settings": { "value": "10+", "label": "Years of Excellence" } },
-      { "type": "stat", "settings": { "value": "500+", "label": "Events Hosted" } },
-      { "type": "stat", "settings": { "value": "5★", "label": "Guest Rating" } }
+  "blocks": [{
+    "type": "stat", "name": "Stat",
+    "settings": [
+      { "type": "text", "id": "value", "label": "Value", "default": "10+" },
+      { "type": "text", "id": "label", "label": "Label", "default": "Years of Excellence" }
     ]
-  }]
+  }],
+  "presets": [{ "name": "About", "blocks": [
+    { "type": "stat", "settings": { "value": "10+", "label": "Years of Excellence" } },
+    { "type": "stat", "settings": { "value": "500+", "label": "Events Hosted" } },
+    { "type": "stat", "settings": { "value": "5★",  "label": "Guest Rating" } }
+  ]}]
 }
 {% endschema %}

@@ -1,97 +1,110 @@
 <style>
-.welcome-strip {
+.welcome-intro {
   background: var(--color-surface);
-  padding-block: var(--sp-lg);
+  padding-block: var(--sp-xl);
   text-align: center;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
-.welcome-strip .eyebrow { margin-bottom: 0.75rem; }
-.welcome-strip h2 {
+.welcome-intro__eyebrow { margin-bottom: 1rem; }
+.welcome-intro__heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-style: italic;
+  font-weight: 400;
   max-width: 700px;
   margin-inline: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: var(--color-white);
 }
-.welcome-strip p {
+.welcome-intro__text {
   color: var(--color-muted);
-  max-width: 560px;
+  max-width: 540px;
   margin-inline: auto;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.9;
+  margin-bottom: 2.5rem;
 }
-.welcome-strip-features {
+.welcome-intro__pillars {
   display: flex;
   justify-content: center;
-  gap: 3rem;
-  margin-top: 2.5rem;
+  align-items: stretch;
   flex-wrap: wrap;
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--color-border);
 }
-.welcome-feature {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+.welcome-pillar {
+  flex: 1;
+  min-width: 140px;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--color-border);
+  text-align: center;
+  transition: background var(--transition);
 }
-.welcome-feature-icon { font-size: 1.5rem; color: var(--color-accent); }
-.welcome-feature-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
+.welcome-pillar:last-child { border-right: none; }
+.welcome-pillar:hover { background: rgba(197,168,128,0.04); }
+.welcome-pillar__icon { font-size: 1.3rem; margin-bottom: 0.75rem; display: block; color: var(--color-accent); }
+.welcome-pillar__label {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-muted);
+  font-weight: 500;
 }
 
-@media (max-width: 576px) { .welcome-strip-features { gap: 1.5rem; } }
+@media (max-width: 576px) {
+  .welcome-pillar { min-width: 50%; border-right: none; border-bottom: 1px solid var(--color-border); }
+  .welcome-pillar:last-child { border-bottom: none; }
+}
 </style>
 
-<section class="welcome-strip">
+<section class="welcome-intro">
   <div class="container container--narrow">
-    <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Welcome' }}</p>
-    <h2 class="fade-up">{{ section.settings.heading | default: 'Exceptional Food. Memorable Moments.' }}</h2>
-    <p class="fade-up">{{ section.settings.description | default: 'Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings at Megan The Restaurant.' }}</p>
-
-    {%- if section.blocks.size > 0 -%}
-      <div class="welcome-strip-features">
+    <p class="eyebrow welcome-intro__eyebrow fade-up">{{ section.settings.eyebrow | default: 'Welcome' }}</p>
+    <h2 class="welcome-intro__heading fade-up">{{ section.settings.heading | default: 'Exceptional Food. Memorable Moments.' }}</h2>
+    <p class="welcome-intro__text fade-up">{{ section.settings.description | default: 'Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings at Megan The Restaurant.' }}</p>
+    {%- if section.settings.btn_text != blank -%}
+      <a href="{{ section.settings.btn_url | default: '/pages/about' }}" class="btn btn--outline fade-up">{{ section.settings.btn_text }}</a>
+    {%- endif -%}
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <div class="container">
+      <div class="welcome-intro__pillars">
         {%- for block in section.blocks -%}
-          <div class="welcome-feature fade-up" {{ block.shopify_attributes }}>
-            <span class="welcome-feature-icon" aria-hidden="true">{{ block.settings.icon | default: '✦' }}</span>
-            <span class="welcome-feature-label">{{ block.settings.label }}</span>
+          <div class="welcome-pillar fade-up" {{ block.shopify_attributes }}>
+            <span class="welcome-pillar__icon" aria-hidden="true">{{ block.settings.icon | default: '✦' }}</span>
+            <span class="welcome-pillar__label">{{ block.settings.label }}</span>
           </div>
         {%- endfor -%}
       </div>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Welcome Strip",
+  "name": "Welcome Intro",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Welcome" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Exceptional Food. Memorable Moments." },
-    { "type": "text", "id": "description", "label": "Description", "default": "Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings at Megan The Restaurant." }
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",     "default": "Welcome" },
+    { "type": "text",     "id": "heading",     "label": "Heading",     "default": "Exceptional Food. Memorable Moments." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings at Megan The Restaurant." },
+    { "type": "text",     "id": "btn_text",    "label": "Button text", "default": "Discover Our Story" },
+    { "type": "url",      "id": "btn_url",     "label": "Button URL" }
   ],
-  "blocks": [
-    {
-      "type": "feature",
-      "name": "Feature",
-      "settings": [
-        { "type": "text", "id": "icon", "label": "Emoji icon", "default": "🍽" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Dine-In" }
-      ]
-    }
-  ],
-  "presets": [{
-    "name": "Welcome Strip",
-    "blocks": [
-      { "type": "feature", "settings": { "icon": "🍽", "label": "Dine-In" } },
-      { "type": "feature", "settings": { "icon": "🥂", "label": "Private Events" } },
-      { "type": "feature", "settings": { "icon": "🎊", "label": "Banquets" } },
-      { "type": "feature", "settings": { "icon": "🚗", "label": "Catering" } },
-      { "type": "feature", "settings": { "icon": "📅", "label": "Reservations" } }
+  "blocks": [{
+    "type": "pillar", "name": "Pillar",
+    "settings": [
+      { "type": "text", "id": "icon",  "label": "Emoji icon", "default": "🍽" },
+      { "type": "text", "id": "label", "label": "Label",      "default": "Dine-In" }
     ]
-  }]
+  }],
+  "presets": [{ "name": "Welcome Intro", "blocks": [
+    { "type": "pillar", "settings": { "icon": "🍽",  "label": "Dine-In" } },
+    { "type": "pillar", "settings": { "icon": "🥂",  "label": "Private Events" } },
+    { "type": "pillar", "settings": { "icon": "🎊",  "label": "Banquets" } },
+    { "type": "pillar", "settings": { "icon": "🚗",  "label": "Catering" } },
+    { "type": "pillar", "settings": { "icon": "📅",  "label": "Reservations" } }
+  ]}]
 }
 {% endschema %}

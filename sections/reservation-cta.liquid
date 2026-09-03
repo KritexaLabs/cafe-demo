@@ -4,61 +4,76 @@
   padding-block: var(--sp-xl);
   text-align: center;
   overflow: hidden;
+  background: var(--color-surface-2);
 }
-.reservation-cta__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.reservation-cta__bg { position: absolute; inset: 0; z-index: 0; }
+.reservation-cta__bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
+.reservation-cta__overlay { position: absolute; inset: 0; background: var(--color-bg); opacity: 0.6; z-index: 1; }
+.reservation-cta__content { position: relative; z-index: 2; max-width: 680px; margin-inline: auto; }
+.reservation-cta__eyebrow { display: block; margin-bottom: 1rem; }
+.reservation-cta__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
 }
-.reservation-cta__bg img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.25;
-}
-.reservation-cta__overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--color-bg);
-  opacity: 0.7;
-  z-index: 1;
-}
-.reservation-cta__content {
-  position: relative;
-  z-index: 2;
-  max-width: 680px;
+.reservation-cta__desc {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
   margin-inline: auto;
 }
-.reservation-cta__content .eyebrow { margin-bottom: 1rem; }
-.reservation-cta__content .section-title { margin-bottom: 1rem; }
-.reservation-cta__content p {
-  color: var(--color-muted);
-  margin-bottom: 2rem;
-  font-size: 1rem;
+.reservation-cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+.reservation-cta__address {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(136,136,136,0.5);
+  line-height: 1.9;
 }
-.reservation-cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+/* Phone CTA — big like the reference */
+.reservation-cta__phone {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-style: italic;
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
 </style>
 
 <section class="reservation-cta" id="reservation-cta">
   <div class="reservation-cta__bg">
     {%- if section.settings.image != blank -%}
-      <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="" loading="lazy" aria-hidden="true">
+      <img src="{{ section.settings.image | image_url: width: 1800 }}" alt="" loading="lazy" aria-hidden="true">
     {%- endif -%}
   </div>
   <div class="reservation-cta__overlay"></div>
   <div class="container reservation-cta__content">
-    <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Reservations' }}</p>
-    <h2 class="section-title fade-up">{{ section.settings.heading | default: 'Reserve Your Table' }}</h2>
-    <p class="fade-up">{{ section.settings.description | default: 'Join us for an unforgettable dining experience. Book your table today.' }}</p>
+    <span class="eyebrow reservation-cta__eyebrow fade-up">{{ section.settings.eyebrow | default: 'Reservations' }}</span>
+    <h2 class="reservation-cta__heading fade-up">{{ section.settings.heading | default: 'Ready for Your Table?' }}</h2>
+    <p class="reservation-cta__desc fade-up">{{ section.settings.description | default: 'Make your next meal memorable. Book your table at Megan The Restaurant.' }}</p>
+    {%- if settings.phone != blank -%}
+      <a href="tel:{{ settings.phone }}" class="reservation-cta__phone fade-up">{{ settings.phone }}</a>
+    {%- endif -%}
     <div class="reservation-cta__actions fade-up">
       <a href="{{ settings.reservation_url | default: '/pages/reservation' }}" class="btn btn--primary">
         {{ settings.reservation_btn_text | default: 'Book a Table' }}
       </a>
       {%- if section.settings.secondary_btn_text != blank -%}
-        <a href="{{ section.settings.secondary_btn_url | default: '/pages/contact' }}" class="btn btn--ghost">
+        <a href="{{ section.settings.secondary_btn_url | default: '/pages/contact' }}" class="btn btn--outline-light">
           {{ section.settings.secondary_btn_text }}
         </a>
       {%- endif -%}
     </div>
+    <p class="reservation-cta__address fade-up">
+      {{ settings.address_line1 }}&nbsp;&nbsp;·&nbsp;&nbsp;{{ settings.address_line2 }}&nbsp;&nbsp;·&nbsp;&nbsp;{{ settings.address_country }}
+    </p>
   </div>
 </section>
 
@@ -66,12 +81,12 @@
 {
   "name": "Reservation CTA",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reservations" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Reserve Your Table" },
-    { "type": "text", "id": "description", "label": "Description", "default": "Join us for an unforgettable dining experience. Book your table today." },
-    { "type": "text", "id": "secondary_btn_text", "label": "Secondary button text", "default": "Contact Us" },
-    { "type": "url", "id": "secondary_btn_url", "label": "Secondary button URL" }
+    { "type": "image_picker", "id": "image",              "label": "Background image" },
+    { "type": "text",         "id": "eyebrow",            "label": "Eyebrow",          "default": "Reservations" },
+    { "type": "text",         "id": "heading",            "label": "Heading",          "default": "Ready for Your Table?" },
+    { "type": "textarea",     "id": "description",        "label": "Description",      "default": "Make your next meal memorable. Book your table at Megan The Restaurant." },
+    { "type": "text",         "id": "secondary_btn_text", "label": "Secondary button", "default": "Contact Us" },
+    { "type": "url",          "id": "secondary_btn_url",  "label": "Secondary button URL" }
   ],
   "presets": [{ "name": "Reservation CTA" }]
 }

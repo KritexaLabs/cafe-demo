@@ -3,10 +3,11 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Welcome to",
-        "heading": "Megan\nThe Restaurant",
-        "subheading": "Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings.",
-        "btn_primary_text": "Book a Table",
+        "specialty_badge": "Italian Specialities",
+        "heading": "Good Food | Good Wine",
+        "sub_name": "Country's Most Loved! Serving Since 1978.",
+        "tagline": "Country's Most Loved! Serving Since 1978.",
+        "btn_primary_text": "Reserve A Table",
         "btn_secondary_text": "Explore Menu",
         "overlay_opacity": 6,
         "text_align": "center",
@@ -17,22 +18,22 @@
       "type": "welcome-strip",
       "settings": {},
       "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "🍽", "label": "Dine-In" } },
-        "f2": { "type": "feature", "settings": { "icon": "🥂", "label": "Private Events" } },
-        "f3": { "type": "feature", "settings": { "icon": "🎊", "label": "Banquets" } },
-        "f4": { "type": "feature", "settings": { "icon": "🚗", "label": "Catering" } },
-        "f5": { "type": "feature", "settings": { "icon": "📅", "label": "Reservations" } }
+        "f1": { "type": "pillar", "settings": { "icon": "🍽", "label": "Dine-In" } },
+        "f2": { "type": "pillar", "settings": { "icon": "🥂", "label": "Private Events" } },
+        "f3": { "type": "pillar", "settings": { "icon": "🎊", "label": "Banquets" } },
+        "f4": { "type": "pillar", "settings": { "icon": "🚗", "label": "Catering" } },
+        "f5": { "type": "pillar", "settings": { "icon": "📅", "label": "Reservations" } }
       },
       "block_order": ["f1","f2","f3","f4","f5"]
     },
     "about": {
       "type": "about",
       "settings": {
-        "eyebrow": "A Place to Gather",
-        "heading": "More Than Just A Meal",
+        "eyebrow": "Our Story",
+        "heading": "We Are Locally Crafted Food & Wine Serving Since 1978",
         "description": "<p>Megan The Restaurant brings together exceptional food, welcoming hospitality and an atmosphere designed for memorable moments. Whether you're joining us for an intimate dinner or a grand celebration, every visit is crafted with care.</p>",
         "image_position": "left",
-        "btn_text": "Our Story",
+        "btn_text": "Discover Our Story",
         "btn_url": "/pages/about",
         "show_stats": true
       },
@@ -49,7 +50,7 @@
         "eyebrow": "Our Menu",
         "heading": "Crafted with Passion",
         "subheading": "From starters to desserts, every dish is prepared with the finest ingredients.",
-        "btn_text": "View Full Menu",
+        "btn_text": "Discover Entire Menu",
         "menu_url": "/pages/menu"
       },
       "blocks": {
@@ -100,6 +101,15 @@
       },
       "blocks": {},
       "block_order": []
+    },
+    "happy_hours": {
+      "type": "happy-hours",
+      "settings": {
+        "badge": "Wednesdays Means",
+        "headline": "Happy Hours!",
+        "offer": "Half Price Bottles of Wine and Six Tasty Lunches for $9",
+        "btn_text": "Claim Offer"
+      }
     },
     "testimonials": {
       "type": "testimonials",
@@ -154,6 +164,7 @@
     "welcome",
     "about",
     "menu_preview",
+    "happy_hours",
     "banquet",
     "catering_preview",
     "gallery",

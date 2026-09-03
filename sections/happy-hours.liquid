@@ -1,0 +1,123 @@
+<style>
+.happy-hours {
+  background: var(--color-surface-2);
+  padding-block: var(--sp-xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle texture overlay */
+.happy-hours::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 40px,
+    rgba(197,168,128,0.02) 40px,
+    rgba(197,168,128,0.02) 41px
+  );
+  pointer-events: none;
+}
+.happy-hours__inner { position: relative; z-index: 1; }
+
+.happy-hours__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid rgba(197,168,128,0.3);
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.happy-hours__headline {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-white);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.happy-hours__offer {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: 2.5rem;
+}
+.happy-hours__offer strong {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.happy-hours__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.happy-hours__divider-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(197,168,128,0.3);
+}
+.happy-hours__divider-icon {
+  color: var(--color-accent);
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .happy-hours__headline { line-height: 1; }
+}
+</style>
+
+<section class="happy-hours" id="happy-hours">
+  <div class="container happy-hours__inner">
+    <span class="happy-hours__badge fade-up">{{ section.settings.badge | default: 'Wednesdays Means' }}</span>
+
+    <h2 class="happy-hours__headline fade-up">
+      {{ section.settings.headline | default: 'Happy Hours!' }}
+    </h2>
+
+    <div class="happy-hours__divider fade-up" aria-hidden="true">
+      <span class="happy-hours__divider-line"></span>
+      <span class="happy-hours__divider-icon">✦</span>
+      <span class="happy-hours__divider-line"></span>
+    </div>
+
+    <p class="happy-hours__offer fade-up">
+      {{ section.settings.offer | default: 'Half Price Bottles of Wine and Six Tasty Lunches for $9' }}
+    </p>
+
+    {%- if section.settings.btn_text != blank -%}
+      <a href="{{ section.settings.btn_url | default: '/pages/menu' }}" class="btn btn--outline fade-up">
+        {{ section.settings.btn_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Happy Hours Promo",
+  "settings": [
+    { "type": "text",     "id": "badge",    "label": "Badge text",   "default": "Wednesdays Means" },
+    { "type": "text",     "id": "headline", "label": "Headline",     "default": "Happy Hours!" },
+    { "type": "textarea", "id": "offer",    "label": "Offer text",   "default": "Half Price Bottles of Wine and Six Tasty Lunches for $9" },
+    { "type": "text",     "id": "btn_text", "label": "Button text",  "default": "Claim Offer" },
+    { "type": "url",      "id": "btn_url",  "label": "Button URL" }
+  ],
+  "presets": [{ "name": "Happy Hours Promo" }]
+}
+{% endschema %}
