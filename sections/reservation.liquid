@@ -1,0 +1,137 @@
+<style>
+.reservation-section { background: var(--color-bg); }
+.reservation-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 5rem;
+  align-items: start;
+}
+.reservation-info .eyebrow { margin-bottom: 0.75rem; }
+.reservation-info .section-title { margin-bottom: 1.25rem; }
+.reservation-info p { color: var(--color-muted); line-height: 1.9; margin-bottom: 2rem; }
+.reservation-detail {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.reservation-detail-icon { color: var(--color-accent); flex-shrink: 0; }
+.reservation-detail-text { font-size: 0.9rem; color: var(--color-muted); line-height: 1.7; }
+.reservation-widget-wrap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  min-height: 400px;
+}
+.reservation-widget-wrap h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.reservation-widget-wrap > p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.reservation-embed-placeholder {
+  background: var(--color-surface-2);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.reservation-embed-placeholder strong { color: var(--color-accent); display: block; margin-bottom: 0.5rem; font-size: 1rem; }
+.reservation-direct-btn { margin-top: 1.5rem; display: flex; justify-content: center; }
+
+@media (max-width: 1024px) { .reservation-layout { gap: 3rem; } }
+@media (max-width: 768px) {
+  .reservation-layout { grid-template-columns: 1fr; }
+  .reservation-widget-wrap { padding: 1.5rem; }
+}
+</style>
+
+<section class="reservation-section" id="reservation">
+  <div class="container">
+    <div class="reservation-layout">
+      <div class="reservation-info">
+        <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Reservations' }}</p>
+        <h2 class="section-title fade-up">{{ section.settings.heading | default: 'Book Your Table' }}</h2>
+        <p class="fade-up">{{ section.settings.description | default: 'Reserve your table at Megan The Restaurant and experience exceptional dining.' }}</p>
+
+        <div class="reservation-detail fade-up">
+          <span class="reservation-detail-icon" aria-hidden="true">📍</span>
+          <div class="reservation-detail-text">
+            {{ settings.address_line1 }}<br>{{ settings.address_line2 }}
+          </div>
+        </div>
+        {%- if settings.phone != blank -%}
+          <div class="reservation-detail fade-up">
+            <span class="reservation-detail-icon" aria-hidden="true">📞</span>
+            <div class="reservation-detail-text">
+              <a href="tel:{{ settings.phone }}">{{ settings.phone }}</a>
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="reservation-detail fade-up">
+          <span class="reservation-detail-icon" aria-hidden="true">🕐</span>
+          <div class="reservation-detail-text">
+            {%- assign days = 'Mon,Tue,Wed,Thu,Fri,Sat,Sun' | split: ',' -%}
+            {%- assign keys = 'hours_monday,hours_tuesday,hours_wednesday,hours_thursday,hours_friday,hours_saturday,hours_sunday' | split: ',' -%}
+            {%- for day in days -%}
+              {{ day }}: {{ settings[keys[forloop.index0]] }}<br>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="reservation-widget-wrap fade-up">
+        <h3>{{ section.settings.widget_heading | default: 'Reserve Your Table' }}</h3>
+        <p>{{ section.settings.widget_subheading | default: 'Select your preferred date, time and party size.' }}</p>
+
+        {%- if settings.reservation_embed != blank -%}
+          <div class="reservation-embed">
+            {{ settings.reservation_embed }}
+          </div>
+        {%- elsif settings.reservation_url != blank -%}
+          <div class="reservation-embed-placeholder">
+            <strong>Online Reservations</strong>
+            Click below to book your table through our reservation system.
+          </div>
+          <div class="reservation-direct-btn">
+            <a href="{{ settings.reservation_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              {{ settings.reservation_btn_text | default: 'Book a Table' }}
+            </a>
+          </div>
+        {%- else -%}
+          <div class="reservation-embed-placeholder">
+            <strong>Reservation Widget</strong>
+            To enable online reservations, go to<br>
+            <strong>Theme Settings → Reservation</strong><br>
+            and add your booking provider URL or embed code.<br><br>
+            Compatible with OpenTable, Resy, SevenRooms, and more.
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reservation",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reservations" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Book Your Table" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Reserve your table at Megan The Restaurant and experience exceptional dining." },
+    { "type": "text", "id": "widget_heading", "label": "Widget heading", "default": "Reserve Your Table" },
+    { "type": "text", "id": "widget_subheading", "label": "Widget subheading", "default": "Select your preferred date, time and party size." }
+  ],
+  "presets": [{ "name": "Reservation" }]
+}
+{% endschema %}

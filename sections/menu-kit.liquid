@@ -1,0 +1,79 @@
+<style>
+.menu-kit-section { background: var(--color-bg); text-align: center; }
+.menu-kit-inner {
+  max-width: 680px;
+  margin-inline: auto;
+}
+.menu-kit-inner .eyebrow { margin-bottom: 0.75rem; }
+.menu-kit-inner .section-title { margin-bottom: 1rem; }
+.menu-kit-inner p { color: var(--color-muted); margin-bottom: 2.5rem; line-height: 1.9; }
+.menu-kit-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.menu-kit-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.menu-kit-placeholder {
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  margin-top: 2rem;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.menu-kit-placeholder strong { color: var(--color-accent); display: block; margin-bottom: 0.5rem; }
+</style>
+
+<section class="menu-kit-section">
+  <div class="container">
+    <div class="menu-kit-inner">
+      <span class="menu-kit-icon fade-in" aria-hidden="true">📋</span>
+      <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Menu Kit' }}</p>
+      <h2 class="section-title fade-up">{{ section.settings.heading | default: 'Download Our Menu' }}</h2>
+      <p class="fade-up">{{ section.settings.description | default: 'Get our complete menu as a PDF to browse at your convenience.' }}</p>
+
+      <div class="menu-kit-actions fade-up">
+        {%- if settings.menu_pdf_url != blank -%}
+          <a
+            href="{{ settings.menu_pdf_url }}"
+            class="btn btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            aria-label="Download menu PDF"
+          >
+            {{ settings.menu_pdf_label | default: 'Download Menu PDF' }}
+          </a>
+        {%- else -%}
+          <div class="menu-kit-placeholder">
+            <strong>Menu PDF Not Yet Configured</strong>
+            To enable the menu download, go to<br>
+            <strong>Theme Settings → Menu PDF</strong><br>
+            Upload your PDF to Shopify Files and paste the URL there.
+          </div>
+        {%- endif -%}
+        <a href="/pages/menu" class="btn btn--outline">View Online Menu</a>
+      </div>
+
+      {%- if section.settings.note != blank -%}
+        <p style="margin-top:1.5rem; font-size:0.82rem; color:var(--color-muted);">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Menu Kit",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Menu Kit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Download Our Menu" },
+    { "type": "text", "id": "description", "label": "Description", "default": "Get our complete menu as a PDF to browse at your convenience." },
+    { "type": "text", "id": "note", "label": "Footer note (optional)", "info": "e.g. Menu subject to change. Please inform us of any dietary requirements." }
+  ],
+  "presets": [{ "name": "Menu Kit" }]
+}
+{% endschema %}

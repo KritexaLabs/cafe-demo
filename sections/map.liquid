@@ -1,0 +1,145 @@
+<style>
+.map-section { background: var(--color-bg); padding-block: 0; }
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.map-info {
+  background: var(--color-surface);
+  padding: var(--sp-lg) var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.map-info .eyebrow { margin-bottom: 0.25rem; }
+.map-info h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.map-info-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.map-info-icon {
+  color: var(--color-accent);
+  font-size: 1rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+.map-info-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.map-info-text a { color: var(--color-muted); transition: color var(--transition); }
+.map-info-text a:hover { color: var(--color-accent); }
+.map-embed {
+  position: relative;
+  min-height: 420px;
+  background: var(--color-surface-2);
+}
+.map-embed iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: none;
+  display: block;
+}
+.map-embed-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .map-layout { grid-template-columns: 1fr; }
+  .map-info { padding: var(--sp-md); }
+}
+</style>
+
+<section class="map-section" id="location">
+  <div class="map-layout">
+    <div class="map-info">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow | default: 'Find Us' }}</p>
+        <h2>{{ section.settings.heading | default: 'Our Location' }}</h2>
+      </div>
+
+      <div class="map-info-item">
+        <span class="map-info-icon" aria-hidden="true">📍</span>
+        <div class="map-info-text">
+          {{ settings.address_line1 }}<br>
+          {{ settings.address_line2 }}<br>
+          {{ settings.address_country }}
+        </div>
+      </div>
+
+      {%- if settings.phone != blank -%}
+        <div class="map-info-item">
+          <span class="map-info-icon" aria-hidden="true">📞</span>
+          <div class="map-info-text">
+            <a href="tel:{{ settings.phone }}">{{ settings.phone }}</a>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if settings.email != blank -%}
+        <div class="map-info-item">
+          <span class="map-info-icon" aria-hidden="true">✉</span>
+          <div class="map-info-text">
+            <a href="mailto:{{ settings.email }}">{{ settings.email }}</a>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <a
+        href="https://maps.google.com/?q={{ settings.address_line1 | url_encode }},{{ settings.address_line2 | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--outline"
+        aria-label="Get directions to {{ settings.restaurant_name }}"
+      >
+        Get Directions
+      </a>
+    </div>
+
+    <div class="map-embed">
+      {%- if settings.map_url != blank -%}
+        <iframe
+          src="{{ settings.map_url }}"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Map showing location of {{ settings.restaurant_name }}"
+        ></iframe>
+      {%- else -%}
+        <div class="map-embed-placeholder">
+          <p>Add your Google Maps embed URL in<br><strong>Theme Settings → Contact → Map URL</strong></p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Map & Location",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find Us" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Location" }
+  ],
+  "presets": [{ "name": "Map & Location" }]
+}
+{% endschema %}

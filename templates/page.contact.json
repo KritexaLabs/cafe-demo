@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Get in Touch",
+        "heading": "Contact\nUs",
+        "subheading": "We would love to hear from you.",
+        "section_height": "medium",
+        "overlay_opacity": 0.65,
+        "btn_primary_text": "",
+        "btn_secondary_text": ""
+      }
+    },
+    "contact_main": {
+      "type": "contact",
+      "settings": {
+        "eyebrow": "Get in Touch",
+        "heading": "Contact Us",
+        "description": "We would love to hear from you. Reach out for reservations, events, or any inquiries.",
+        "form_heading": "Send a Message"
+      }
+    },
+    "map_section": {
+      "type": "map",
+      "settings": {
+        "eyebrow": "Find Us",
+        "heading": "Our Location"
+      }
+    },
+    "visiting_hours": {
+      "type": "visiting-hours",
+      "settings": {
+        "eyebrow": "Visit Us",
+        "heading": "Opening Hours",
+        "btn_text": "Book a Table"
+      }
+    }
+  },
+  "order": ["page_hero", "contact_main", "map_section", "visiting_hours"]
+}

@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Gallery",
+        "heading": "A Feast\nfor the Eyes",
+        "subheading": "A glimpse into the Megan The Restaurant experience.",
+        "section_height": "large",
+        "overlay_opacity": 0.6,
+        "btn_primary_text": "",
+        "btn_secondary_text": ""
+      }
+    },
+    "gallery_main": {
+      "type": "gallery",
+      "settings": {
+        "eyebrow": "Our Gallery",
+        "heading": "Moments at Megan",
+        "btn_text": ""
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "reservation_cta": {
+      "type": "reservation-cta",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Experience It in Person",
+        "description": "Book your table and create your own memorable moments."
+      }
+    }
+  },
+  "order": ["page_hero", "gallery_main", "reservation_cta"]
+}

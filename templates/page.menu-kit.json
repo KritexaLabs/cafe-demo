@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Menu Kit",
+        "heading": "View Our\nMenu",
+        "subheading": "Download our complete menu to explore at your leisure.",
+        "section_height": "medium",
+        "overlay_opacity": 0.65,
+        "btn_primary_text": "",
+        "btn_secondary_text": ""
+      }
+    },
+    "menu_kit_main": {
+      "type": "menu-kit",
+      "settings": {
+        "eyebrow": "Menu Kit",
+        "heading": "Download Our Menu",
+        "description": "Get our complete menu as a PDF to browse at your convenience."
+      }
+    }
+  },
+  "order": ["page_hero", "menu_kit_main"]
+}

@@ -1,0 +1,166 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Welcome to",
+        "heading": "Megan\nThe Restaurant",
+        "subheading": "Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings.",
+        "btn_primary_text": "Book a Table",
+        "btn_secondary_text": "Explore Menu",
+        "overlay_opacity": 0.55,
+        "text_align": "center",
+        "section_height": "full"
+      }
+    },
+    "welcome": {
+      "type": "welcome-strip",
+      "settings": {},
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "🍽", "label": "Dine-In" } },
+        "f2": { "type": "feature", "settings": { "icon": "🥂", "label": "Private Events" } },
+        "f3": { "type": "feature", "settings": { "icon": "🎊", "label": "Banquets" } },
+        "f4": { "type": "feature", "settings": { "icon": "🚗", "label": "Catering" } },
+        "f5": { "type": "feature", "settings": { "icon": "📅", "label": "Reservations" } }
+      },
+      "block_order": ["f1","f2","f3","f4","f5"]
+    },
+    "about": {
+      "type": "about",
+      "settings": {
+        "eyebrow": "A Place to Gather",
+        "heading": "More Than Just A Meal",
+        "description": "<p>Megan The Restaurant brings together exceptional food, welcoming hospitality and an atmosphere designed for memorable moments. Whether you're joining us for an intimate dinner or a grand celebration, every visit is crafted with care.</p>",
+        "image_position": "left",
+        "btn_text": "Our Story",
+        "btn_url": "/pages/about",
+        "show_stats": true
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "10+", "label": "Years of Excellence" } },
+        "s2": { "type": "stat", "settings": { "value": "500+", "label": "Events Hosted" } },
+        "s3": { "type": "stat", "settings": { "value": "5★", "label": "Guest Rating" } }
+      },
+      "block_order": ["s1","s2","s3"]
+    },
+    "menu_preview": {
+      "type": "menu-preview",
+      "settings": {
+        "eyebrow": "Our Menu",
+        "heading": "Crafted with Passion",
+        "subheading": "From starters to desserts, every dish is prepared with the finest ingredients.",
+        "btn_text": "View Full Menu",
+        "menu_url": "/pages/menu"
+      },
+      "blocks": {
+        "cat1": { "type": "category", "settings": { "label": "Starters", "category_id": "starters" } },
+        "cat2": { "type": "category", "settings": { "label": "Main Course", "category_id": "mains" } },
+        "cat3": { "type": "category", "settings": { "label": "Seafood", "category_id": "seafood" } },
+        "cat4": { "type": "category", "settings": { "label": "Steaks", "category_id": "steaks" } },
+        "cat5": { "type": "category", "settings": { "label": "Desserts", "category_id": "desserts" } },
+        "cat6": { "type": "category", "settings": { "label": "Drinks", "category_id": "drinks" } }
+      },
+      "block_order": ["cat1","cat2","cat3","cat4","cat5","cat6"]
+    },
+    "banquet": {
+      "type": "banquet",
+      "settings": {
+        "eyebrow": "Banquet & Events",
+        "heading": "Host Your Perfect Event",
+        "description": "<p>From intimate gatherings to grand celebrations, our banquet facilities provide the perfect setting for every occasion.</p>",
+        "capacity_text": "[CAPACITY INFORMATION TO BE ADDED]",
+        "btn_text": "Plan Your Event",
+        "btn_url": "/pages/banquets"
+      },
+      "blocks": {
+        "e1": { "type": "event_type", "settings": { "icon": "💍", "name": "Weddings", "description": "Celebrate your special day with us." } },
+        "e2": { "type": "event_type", "settings": { "icon": "💼", "name": "Corporate Events", "description": "Professional settings for business gatherings." } },
+        "e3": { "type": "event_type", "settings": { "icon": "🎂", "name": "Birthday Parties", "description": "Make your birthday truly memorable." } },
+        "e4": { "type": "event_type", "settings": { "icon": "🥂", "name": "Private Dining", "description": "Exclusive dining for intimate occasions." } }
+      },
+      "block_order": ["e1","e2","e3","e4"]
+    },
+    "catering_preview": {
+      "type": "reservation-cta",
+      "settings": {
+        "eyebrow": "Catering Services",
+        "heading": "We Come to You",
+        "description": "Megan The Restaurant brings the same exceptional quality and hospitality to your venue.",
+        "secondary_btn_text": "Learn More",
+        "secondary_btn_url": "/pages/catering"
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "settings": {
+        "eyebrow": "Gallery",
+        "heading": "A Feast for the Eyes",
+        "btn_text": "View Full Gallery",
+        "btn_url": "/pages/gallery"
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Guest Reviews",
+        "heading": "What Our Guests Say"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "review": "An exceptional dining experience from start to finish. The food was outstanding and the service impeccable.", "name": "Guest Name", "date": "October 2024", "rating": 5 } },
+        "t2": { "type": "testimonial", "settings": { "review": "Megan The Restaurant is our go-to for special occasions. Every visit feels like a celebration.", "name": "Guest Name", "date": "September 2024", "rating": 5 } },
+        "t3": { "type": "testimonial", "settings": { "review": "The atmosphere is warm and sophisticated. Truly a gem in Johnston.", "name": "Guest Name", "date": "August 2024", "rating": 5 } }
+      },
+      "block_order": ["t1","t2","t3"]
+    },
+    "reservation_cta": {
+      "type": "reservation-cta",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Reserve Your Table",
+        "description": "Join us for an unforgettable dining experience. Book your table today.",
+        "secondary_btn_text": "Contact Us",
+        "secondary_btn_url": "/pages/contact"
+      }
+    },
+    "visiting_hours": {
+      "type": "visiting-hours",
+      "settings": {
+        "eyebrow": "Visit Us",
+        "heading": "Opening Hours",
+        "btn_text": "Book a Table"
+      }
+    },
+    "map": {
+      "type": "map",
+      "settings": {
+        "eyebrow": "Find Us",
+        "heading": "Our Location"
+      }
+    },
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "eyebrow": "Get in Touch",
+        "heading": "Contact Us",
+        "description": "We would love to hear from you. Reach out for reservations, events, or any inquiries.",
+        "form_heading": "Send a Message"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "welcome",
+    "about",
+    "menu_preview",
+    "banquet",
+    "catering_preview",
+    "gallery",
+    "testimonials",
+    "reservation_cta",
+    "visiting_hours",
+    "map",
+    "contact"
+  ]
+}

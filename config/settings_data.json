@@ -1,0 +1,29 @@
+{
+  "current": {
+    "restaurant_name": "Megan The Restaurant",
+    "logo_width": 160,
+    "color_bg": "#0e0c0a",
+    "color_surface": "#161310",
+    "color_text": "#f0ebe3",
+    "color_muted": "#9a8f82",
+    "color_accent": "#c9a96e",
+    "color_border": "#2e2820",
+    "address_line1": "1163 Central A",
+    "address_line2": "Johnston, Rhode Island 02919",
+    "address_country": "USA",
+    "phone": "[RESTAURANT PHONE]",
+    "email": "[RESTAURANT EMAIL]",
+    "hours_monday": "Closed",
+    "hours_tuesday": "5:00 PM – 10:00 PM",
+    "hours_wednesday": "5:00 PM – 10:00 PM",
+    "hours_thursday": "5:00 PM – 10:00 PM",
+    "hours_friday": "5:00 PM – 11:00 PM",
+    "hours_saturday": "5:00 PM – 11:00 PM",
+    "hours_sunday": "Closed",
+    "reservation_btn_text": "Book a Table",
+    "menu_pdf_label": "Download Menu PDF",
+    "enable_animations": true,
+    "footer_copyright": "© Megan The Restaurant. All Rights Reserved."
+  },
+  "presets": {}
+}

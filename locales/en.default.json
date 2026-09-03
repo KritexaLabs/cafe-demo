@@ -1,0 +1,22 @@
+{
+  "general": {
+    "skip_to_content": "Skip to main content",
+    "close": "Close",
+    "open_menu": "Open navigation menu",
+    "close_menu": "Close navigation menu"
+  },
+  "accessibility": {
+    "image_viewer": "Image viewer",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Send Message",
+    "success": "Thank you for your message. We will be in touch shortly.",
+    "required": "Required field"
+  }
+}

@@ -1,0 +1,28 @@
+/* ============================================
+   MEGAN THE RESTAURANT — RESPONSIVE STYLES
+   ============================================ */
+
+@media (max-width: 1200px) {
+  :root { --sp-xl: 5.5rem; }
+}
+
+@media (max-width: 1024px) {
+  :root { --sp-xl: 4.5rem; --sp-lg: 3rem; }
+  .container { padding-inline: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  :root { --sp-xl: 3.5rem; --sp-lg: 2.5rem; --sp-md: 1.5rem; }
+  .container { padding-inline: 1.25rem; }
+  section { padding-block: var(--sp-xl); }
+  .section-header { margin-bottom: 2.5rem; }
+}
+
+@media (max-width: 576px) {
+  :root { --sp-xl: 3rem; }
+  .btn { padding: 0.8rem 1.6rem; font-size: 0.68rem; }
+}
+
+@media (max-width: 375px) {
+  :root { --sp-xl: 2.5rem; }
+}

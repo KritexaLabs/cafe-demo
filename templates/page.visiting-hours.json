@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Visit Us",
+        "heading": "Opening\nHours",
+        "subheading": "We look forward to welcoming you.",
+        "section_height": "medium",
+        "overlay_opacity": 0.65,
+        "btn_primary_text": "",
+        "btn_secondary_text": ""
+      }
+    },
+    "hours_main": {
+      "type": "visiting-hours",
+      "settings": {
+        "eyebrow": "Visit Us",
+        "heading": "Opening Hours",
+        "btn_text": "Book a Table"
+      }
+    },
+    "map_section": {
+      "type": "map",
+      "settings": {
+        "eyebrow": "Find Us",
+        "heading": "Our Location"
+      }
+    },
+    "reservation_cta": {
+      "type": "reservation-cta",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Reserve Your Table",
+        "description": "Join us for an unforgettable dining experience. Book your table today."
+      }
+    }
+  },
+  "order": ["page_hero", "hours_main", "map_section", "reservation_cta"]
+}

@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Catering Services",
+        "heading": "We Come\nto You",
+        "subheading": "Restaurant-quality food and service delivered to your venue.",
+        "section_height": "large",
+        "overlay_opacity": 0.6,
+        "btn_primary_text": "Request Catering",
+        "btn_primary_url": "#catering-form",
+        "btn_secondary_text": ""
+      }
+    },
+    "catering_main": {
+      "type": "catering",
+      "settings": {
+        "eyebrow": "Catering Services",
+        "heading": "We Come to You",
+        "description": "<p>Megan The Restaurant brings the same exceptional quality and hospitality to your venue. Our experienced catering team handles every detail so you can focus on enjoying your event.</p>",
+        "cta_text": "Request Catering",
+        "form_heading": "Plan Your Next Event",
+        "form_subheading": "Fill out the form below and our catering team will be in touch within 24 hours."
+      },
+      "blocks": {
+        "o1": { "type": "option", "settings": { "icon": "🏢", "name": "Corporate Catering", "description": "Professional catering for meetings, conferences and corporate events." } },
+        "o2": { "type": "option", "settings": { "icon": "🎊", "name": "Social Events", "description": "Weddings, birthdays, anniversaries and all celebrations." } },
+        "o3": { "type": "option", "settings": { "icon": "🍱", "name": "Drop-Off Catering", "description": "Freshly prepared meals delivered to your location." } },
+        "w1": { "type": "why", "settings": { "icon": "👨‍🍳", "title": "Expert Chefs", "description": "Our culinary team brings restaurant-quality food to your event." } },
+        "w2": { "type": "why", "settings": { "icon": "🌿", "title": "Fresh Ingredients", "description": "We use only the finest, freshest ingredients in every dish." } },
+        "w3": { "type": "why", "settings": { "icon": "🤝", "title": "Dedicated Service", "description": "A dedicated event coordinator for every catering booking." } },
+        "w4": { "type": "why", "settings": { "icon": "✨", "title": "Customizable Menus", "description": "Tailored menus to suit your event, dietary needs and budget." } }
+      },
+      "block_order": ["o1","o2","o3","w1","w2","w3","w4"]
+    }
+  },
+  "order": ["page_hero", "catering_main"]
+}

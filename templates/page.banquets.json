@@ -1,0 +1,56 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Banquet & Events",
+        "heading": "Host Your\nPerfect Event",
+        "subheading": "Elegant spaces for every occasion, from intimate gatherings to grand celebrations.",
+        "section_height": "large",
+        "overlay_opacity": 0.6,
+        "btn_primary_text": "Plan Your Event",
+        "btn_primary_url": "#banquets",
+        "btn_secondary_text": ""
+      }
+    },
+    "banquet_main": {
+      "type": "banquet",
+      "settings": {
+        "eyebrow": "Banquet & Events",
+        "heading": "Host Your Perfect Event",
+        "description": "<p>From intimate gatherings to grand celebrations, our banquet facilities provide the perfect setting for every occasion. Our dedicated events team will work with you to create an unforgettable experience.</p>",
+        "capacity_text": "[CAPACITY INFORMATION TO BE ADDED]",
+        "btn_text": "Plan Your Event",
+        "btn_url": "/pages/contact"
+      },
+      "blocks": {
+        "e1": { "type": "event_type", "settings": { "icon": "💍", "name": "Weddings", "description": "Celebrate your special day with us." } },
+        "e2": { "type": "event_type", "settings": { "icon": "💼", "name": "Corporate Events", "description": "Professional settings for business gatherings." } },
+        "e3": { "type": "event_type", "settings": { "icon": "🎂", "name": "Birthday Parties", "description": "Make your birthday truly memorable." } },
+        "e4": { "type": "event_type", "settings": { "icon": "🥂", "name": "Private Dining", "description": "Exclusive dining for intimate occasions." } },
+        "e5": { "type": "event_type", "settings": { "icon": "💑", "name": "Anniversaries", "description": "Celebrate milestones in style." } },
+        "e6": { "type": "event_type", "settings": { "icon": "🎊", "name": "Celebrations", "description": "Any occasion worth celebrating." } },
+        "e7": { "type": "event_type", "settings": { "icon": "🥳", "name": "Receptions", "description": "Elegant receptions for every event." } },
+        "e8": { "type": "event_type", "settings": { "icon": "🎓", "name": "Graduations", "description": "Mark your achievements with a celebration." } },
+        "f1": { "type": "feature", "settings": { "icon": "🍽", "title": "Full Catering Service", "description": "[Details to be added]" } },
+        "f2": { "type": "feature", "settings": { "icon": "🎵", "title": "AV Equipment", "description": "[Details to be added]" } },
+        "f3": { "type": "feature", "settings": { "icon": "🅿", "title": "Parking Available", "description": "[Details to be added]" } },
+        "f4": { "type": "feature", "settings": { "icon": "♿", "title": "Accessible Venue", "description": "[Details to be added]" } },
+        "f5": { "type": "feature", "settings": { "icon": "🌿", "title": "Custom Décor", "description": "[Details to be added]" } },
+        "f6": { "type": "feature", "settings": { "icon": "🍾", "title": "Bar Service", "description": "[Details to be added]" } }
+      },
+      "block_order": ["e1","e2","e3","e4","e5","e6","e7","e8","f1","f2","f3","f4","f5","f6"]
+    },
+    "reservation_cta": {
+      "type": "reservation-cta",
+      "settings": {
+        "eyebrow": "Get Started",
+        "heading": "Plan Your Event Today",
+        "description": "Contact our events team to discuss your requirements.",
+        "secondary_btn_text": "Contact Us",
+        "secondary_btn_url": "/pages/contact"
+      }
+    }
+  },
+  "order": ["page_hero", "banquet_main", "reservation_cta"]
+}

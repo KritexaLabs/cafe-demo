@@ -1,0 +1,108 @@
+<style>
+.visiting-hours { background: var(--color-surface); }
+.hours-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.hours-image {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.hours-image img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+.hours-image-placeholder {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--color-surface-2);
+}
+.hours-content .eyebrow { margin-bottom: 0.75rem; }
+.hours-content .section-title { margin-bottom: 2rem; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table tr { border-bottom: 1px solid var(--color-border); }
+.hours-table tr:last-child { border-bottom: none; }
+.hours-table td {
+  padding: 0.85rem 0;
+  font-size: 0.92rem;
+}
+.hours-table .day-name { color: var(--color-text); font-weight: 400; }
+.hours-table .day-hours { color: var(--color-muted); text-align: right; }
+.hours-table .closed { color: var(--color-muted); opacity: 0.6; }
+.hours-notice {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(201,169,110,0.08);
+  border-left: 2px solid var(--color-accent);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+@media (max-width: 768px) {
+  .hours-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hours-image { display: none; }
+}
+</style>
+
+<section class="visiting-hours" id="hours">
+  <div class="container">
+    <div class="hours-layout">
+      <div class="hours-image fade-in">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 700 }}" alt="{{ section.settings.image.alt | default: 'Restaurant interior' }}" loading="lazy" width="700">
+        {%- else -%}
+          <div class="hours-image-placeholder"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="hours-content">
+        <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Visit Us' }}</p>
+        <h2 class="section-title fade-up">{{ section.settings.heading | default: 'Opening Hours' }}</h2>
+
+        <table class="hours-table fade-up" aria-label="Opening hours">
+          <tbody>
+            {%- assign days = 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday' | split: ',' -%}
+            {%- assign keys = 'hours_monday,hours_tuesday,hours_wednesday,hours_thursday,hours_friday,hours_saturday,hours_sunday' | split: ',' -%}
+            {%- for day in days -%}
+              {%- assign hours_val = settings[keys[forloop.index0]] -%}
+              <tr>
+                <td class="day-name">{{ day }}</td>
+                <td class="day-hours{% if hours_val == 'Closed' %} closed{% endif %}">{{ hours_val }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        {%- if settings.hours_notice != blank -%}
+          <div class="hours-notice fade-up">{{ settings.hours_notice }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.btn_text != blank -%}
+          <a href="{{ section.settings.btn_url | default: settings.reservation_url | default: '/pages/reservation' }}" class="btn btn--outline fade-up" style="margin-top: 1.5rem;">
+            {{ section.settings.btn_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Visiting Hours",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Visit Us" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Opening Hours" },
+    { "type": "image_picker", "id": "image", "label": "Side image" },
+    { "type": "text", "id": "btn_text", "label": "CTA button text", "default": "Book a Table" },
+    { "type": "url", "id": "btn_url", "label": "CTA button URL" }
+  ],
+  "presets": [{ "name": "Visiting Hours" }]
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Book Your\nTable",
+        "subheading": "Reserve your table at Megan The Restaurant.",
+        "section_height": "medium",
+        "overlay_opacity": 0.65,
+        "btn_primary_text": "",
+        "btn_secondary_text": ""
+      }
+    },
+    "reservation_main": {
+      "type": "reservation",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Book Your Table",
+        "description": "Reserve your table at Megan The Restaurant and experience exceptional dining.",
+        "widget_heading": "Reserve Your Table",
+        "widget_subheading": "Select your preferred date, time and party size."
+      }
+    }
+  },
+  "order": ["page_hero", "reservation_main"]
+}

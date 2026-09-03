@@ -1,0 +1,114 @@
+<style>
+.gallery-section { background: var(--color-surface); }
+.gallery-grid {
+  columns: 3;
+  column-gap: 1rem;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,8,6,0);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  transition: background 0.3s ease;
+}
+.gallery-item:hover .gallery-item__overlay { background: rgba(10,8,6,0.5); }
+.gallery-item__caption {
+  color: var(--color-text);
+  font-size: 0.82rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.gallery-item:hover .gallery-item__caption { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) { .gallery-grid { columns: 2; } }
+@media (max-width: 480px) { .gallery-grid { columns: 1; } }
+</style>
+
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Gallery' }}</p>
+      <h2 class="section-title fade-up">{{ section.settings.heading | default: 'A Feast for the Eyes' }}</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="gallery-grid" role="list" aria-label="Restaurant gallery">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'image' and block.settings.image != blank -%}
+          <div
+            class="gallery-item fade-in"
+            role="listitem"
+            data-src="{{ block.settings.image | image_url: width: 1200 }}"
+            data-alt="{{ block.settings.alt_text | default: block.settings.image.alt }}"
+            data-caption="{{ block.settings.caption }}"
+            tabindex="0"
+            aria-label="View image{% if block.settings.caption != blank %}: {{ block.settings.caption }}{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              alt="{{ block.settings.alt_text | default: block.settings.image.alt | default: 'Gallery image' }}"
+              loading="lazy"
+              width="800"
+            >
+            <div class="gallery-item__overlay">
+              {%- if block.settings.caption != blank -%}
+                <p class="gallery-item__caption">{{ block.settings.caption }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.btn_text != blank -%}
+      <div style="text-align:center; margin-top: var(--sp-lg);">
+        <a href="{{ section.settings.btn_url | default: '/pages/gallery' }}" class="btn btn--outline fade-up">
+          {{ section.settings.btn_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Gallery" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Feast for the Eyes" },
+    { "type": "text", "id": "btn_text", "label": "View all button text", "default": "View Full Gallery" },
+    { "type": "url", "id": "btn_url", "label": "View all URL" }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Gallery Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt_text", "label": "Alt text" },
+        { "type": "text", "id": "caption", "label": "Caption (optional)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Gallery" }]
+}
+{% endschema %}

@@ -1,0 +1,253 @@
+<style>
+.catering-section { background: var(--color-surface); }
+.catering-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: var(--sp-xl);
+}
+.catering-intro-text .eyebrow { margin-bottom: 0.75rem; }
+.catering-intro-text .section-title { margin-bottom: 1.25rem; }
+.catering-intro-text p { color: var(--color-muted); line-height: 1.9; margin-bottom: 1rem; }
+.catering-intro-img { border-radius: var(--radius-md); overflow: hidden; }
+.catering-intro-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+
+.catering-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: var(--sp-xl);
+}
+.catering-option-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.catering-option-card:hover { border-color: var(--color-accent); transform: translateY(-3px); }
+.catering-option-icon { font-size: 2rem; margin-bottom: 1rem; }
+.catering-option-name { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.catering-option-desc { font-size: 0.88rem; color: var(--color-muted); line-height: 1.7; }
+
+.catering-why {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: var(--sp-xl);
+}
+.catering-why-item { text-align: center; }
+.catering-why-icon { font-size: 2rem; color: var(--color-accent); margin-bottom: 0.75rem; }
+.catering-why-title { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.4rem; }
+.catering-why-desc { font-size: 0.82rem; color: var(--color-muted); }
+
+.catering-form-section {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 3rem;
+  max-width: 860px;
+  margin-inline: auto;
+}
+.catering-form-section h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.catering-form-section > p {
+  text-align: center;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+@media (max-width: 1024px) {
+  .catering-options-grid { grid-template-columns: repeat(2, 1fr); }
+  .catering-why { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .catering-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+  .catering-options-grid { grid-template-columns: 1fr; }
+  .catering-form-section { padding: 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 576px) { .catering-why { grid-template-columns: 1fr; } }
+</style>
+
+<section class="catering-section" id="catering">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="catering-intro">
+      <div class="catering-intro-text">
+        <p class="eyebrow fade-up">{{ section.settings.eyebrow | default: 'Catering Services' }}</p>
+        <h2 class="section-title fade-up">{{ section.settings.heading | default: 'We Come to You' }}</h2>
+        {%- if section.settings.description != blank -%}
+          <div class="fade-up">{{ section.settings.description }}</div>
+        {%- endif -%}
+        <a href="#catering-form" class="btn btn--outline fade-up" style="margin-top:1.25rem;">
+          {{ section.settings.cta_text | default: 'Request Catering' }}
+        </a>
+      </div>
+      <div class="catering-intro-img fade-in">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 700 }}" alt="{{ section.settings.image.alt | default: 'Catering services' }}" loading="lazy" width="700">
+        {%- else -%}
+          <div style="width:100%;aspect-ratio:3/4;background:var(--color-surface-2);"></div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Catering Options -->
+    {%- assign option_blocks = section.blocks | where: 'type', 'option' -%}
+    {%- if option_blocks.size > 0 -%}
+      <div class="section-header">
+        <p class="eyebrow fade-up">What We Offer</p>
+        <h3 class="section-title fade-up">Catering Options</h3>
+        <div class="gold-line"></div>
+      </div>
+      <div class="catering-options-grid">
+        {%- for block in option_blocks -%}
+          <div class="catering-option-card fade-up" {{ block.shopify_attributes }}>
+            <div class="catering-option-icon" aria-hidden="true">{{ block.settings.icon | default: '🍽' }}</div>
+            <h3 class="catering-option-name">{{ block.settings.name }}</h3>
+            <p class="catering-option-desc">{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Why Choose Us -->
+    {%- assign why_blocks = section.blocks | where: 'type', 'why' -%}
+    {%- if why_blocks.size > 0 -%}
+      <div class="section-header">
+        <p class="eyebrow fade-up">Why Choose Us</p>
+        <h3 class="section-title fade-up">The Megan Difference</h3>
+        <div class="gold-line"></div>
+      </div>
+      <div class="catering-why">
+        {%- for block in why_blocks -%}
+          <div class="catering-why-item fade-up" {{ block.shopify_attributes }}>
+            <div class="catering-why-icon" aria-hidden="true">{{ block.settings.icon | default: '⭐' }}</div>
+            <h4 class="catering-why-title">{{ block.settings.title }}</h4>
+            <p class="catering-why-desc">{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Inquiry Form -->
+    <div class="catering-form-section fade-up" id="catering-form" data-validate-wrap>
+      <h3>{{ section.settings.form_heading | default: 'Plan Your Next Event' }}</h3>
+      <p>{{ section.settings.form_subheading | default: 'Fill out the form below and our catering team will be in touch.' }}</p>
+      {%- form 'contact' -%}
+          <div class="form-success{% if form.posted_successfully? %} visible{% endif %}">
+            Thank you! Our catering team will contact you shortly.
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cat-name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="cat-name" name="contact[name]" required autocomplete="name" placeholder="Your name">
+              <p class="form-error" role="alert">Please enter your name.</p>
+            </div>
+            <div class="form-group">
+              <label for="cat-email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="cat-email" name="contact[email]" required autocomplete="email" placeholder="your@email.com">
+              <p class="form-error" role="alert">Please enter a valid email.</p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cat-phone">Phone <span aria-hidden="true">*</span></label>
+              <input type="tel" id="cat-phone" name="contact[phone]" required autocomplete="tel" placeholder="Your phone number">
+              <p class="form-error" role="alert">Please enter a valid phone number.</p>
+            </div>
+            <div class="form-group">
+              <label for="cat-date">Event Date <span aria-hidden="true">*</span></label>
+              <input type="date" id="cat-date" name="contact[event_date]" required>
+              <p class="form-error" role="alert">Please select an event date.</p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cat-type">Event Type <span aria-hidden="true">*</span></label>
+              <select id="cat-type" name="contact[event_type]" required>
+                <option value="">Select event type</option>
+                <option>Wedding</option>
+                <option>Corporate Event</option>
+                <option>Birthday Party</option>
+                <option>Private Dining</option>
+                <option>Anniversary</option>
+                <option>Other</option>
+              </select>
+              <p class="form-error" role="alert">Please select an event type.</p>
+            </div>
+            <div class="form-group">
+              <label for="cat-guests">Number of Guests <span aria-hidden="true">*</span></label>
+              <input type="number" id="cat-guests" name="contact[guests]" required min="1" placeholder="Estimated guest count">
+              <p class="form-error" role="alert">Please enter the number of guests.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cat-message">Additional Details</label>
+            <textarea id="cat-message" name="contact[body]" rows="4" placeholder="Tell us more about your event..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
+            Submit Catering Request
+          </button>
+        {%- endform -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Catering",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Catering Services" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We Come to You" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Megan The Restaurant brings the same exceptional quality and hospitality to your venue. Let us handle every detail of your event catering.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Catering image" },
+    { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "Request Catering" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Plan Your Next Event" },
+    { "type": "text", "id": "form_subheading", "label": "Form subheading", "default": "Fill out the form below and our catering team will be in touch." }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Catering Option",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji icon", "default": "🍽" },
+        { "type": "text", "id": "name", "label": "Option name", "default": "Corporate Catering" },
+        { "type": "text", "id": "description", "label": "Description", "default": "[Details to be added]" }
+      ]
+    },
+    {
+      "type": "why",
+      "name": "Why Choose Us",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji icon", "default": "⭐" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Premium Quality" },
+        { "type": "text", "id": "description", "label": "Description", "default": "[Details to be added]" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Catering",
+    "blocks": [
+      { "type": "option", "settings": { "icon": "🏢", "name": "Corporate Catering", "description": "Professional catering for meetings, conferences and corporate events." } },
+      { "type": "option", "settings": { "icon": "🎊", "name": "Social Events", "description": "Weddings, birthdays, anniversaries and all celebrations." } },
+      { "type": "option", "settings": { "icon": "🍱", "name": "Drop-Off Catering", "description": "Freshly prepared meals delivered to your location." } },
+      { "type": "why", "settings": { "icon": "👨‍🍳", "title": "Expert Chefs", "description": "Our culinary team brings restaurant-quality food to your event." } },
+      { "type": "why", "settings": { "icon": "🌿", "title": "Fresh Ingredients", "description": "We use only the finest, freshest ingredients in every dish." } },
+      { "type": "why", "settings": { "icon": "🤝", "title": "Dedicated Service", "description": "A dedicated event coordinator for every catering booking." } },
+      { "type": "why", "settings": { "icon": "✨", "title": "Customizable Menus", "description": "Tailored menus to suit your event, dietary needs and budget." } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,173 @@
+<style>
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--sp-lg);
+  padding-bottom: var(--sp-md);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: var(--sp-lg);
+}
+.footer-brand .footer-logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 1rem;
+}
+.footer-brand p {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.8;
+  max-width: 240px;
+}
+.footer-social { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+.footer-social a:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  transition: color var(--transition);
+}
+.footer-col ul a:hover { color: var(--color-text); }
+.footer-contact-item {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.footer-hours-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.footer-hours-row:last-child { border-bottom: none; }
+.footer-hours-row .day { color: var(--color-text); }
+.footer-bottom {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--sp-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.footer-bottom p { font-size: 0.78rem; color: var(--color-muted); }
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+@media (max-width: 576px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        {%- if settings.logo -%}
+          <a href="{{ routes.root_url }}">
+            <img src="{{ settings.logo | image_url: width: 140 }}" alt="{{ settings.restaurant_name }}" width="140">
+          </a>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="footer-logo-text">{{ settings.restaurant_name }}</a>
+        {%- endif -%}
+        <p>{{ section.settings.tagline | default: 'Exceptional food, warm hospitality, and unforgettable gatherings.' }}</p>
+        <div class="footer-social">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" aria-label="Instagram" rel="noopener noreferrer" target="_blank">IG</a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" aria-label="Facebook" rel="noopener noreferrer" target="_blank">FB</a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" aria-label="TikTok" rel="noopener noreferrer" target="_blank">TK</a>
+          {%- endif -%}
+          {%- if settings.social_twitter != blank -%}
+            <a href="{{ settings.social_twitter }}" aria-label="X / Twitter" rel="noopener noreferrer" target="_blank">X</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          {%- for link in section.settings.footer_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-item">{{ settings.address_line1 }}<br>{{ settings.address_line2 }}<br>{{ settings.address_country }}</p>
+        {%- if settings.phone != blank -%}
+          <p class="footer-contact-item"><a href="tel:{{ settings.phone }}">{{ settings.phone }}</a></p>
+        {%- endif -%}
+        {%- if settings.email != blank -%}
+          <p class="footer-contact-item"><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+        {%- endif -%}
+      </div>
+
+      <!-- Hours -->
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        {%- assign days = 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday' | split: ',' -%}
+        {%- assign keys = 'hours_monday,hours_tuesday,hours_wednesday,hours_thursday,hours_friday,hours_saturday,hours_sunday' | split: ',' -%}
+        {%- for day in days -%}
+          <div class="footer-hours-row">
+            <span class="day">{{ day }}</span>
+            <span>{{ settings[keys[forloop.index0]] }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>{{ settings.footer_copyright }}</p>
+      <p>Powered by Shopify</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "link_list", "id": "footer_menu", "label": "Footer menu", "default": "footer" },
+    { "type": "text", "id": "tagline", "label": "Brand tagline", "default": "Exceptional food, warm hospitality, and unforgettable gatherings." }
+  ]
+}
+{% endschema %}
