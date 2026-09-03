@@ -54,7 +54,7 @@
       { "type": "text", "id": "hours_friday", "label": "Friday", "default": "5:00 PM – 11:00 PM" },
       { "type": "text", "id": "hours_saturday", "label": "Saturday", "default": "5:00 PM – 11:00 PM" },
       { "type": "text", "id": "hours_sunday", "label": "Sunday", "default": "Closed" },
-      { "type": "text", "id": "hours_notice", "label": "Special hours notice", "default": "" }
+      { "type": "text", "id": "hours_notice", "label": "Special hours notice", "info": "e.g. Closed on public holidays" }
     ]
   },
   {

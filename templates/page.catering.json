@@ -7,7 +7,7 @@
         "heading": "We Come\nto You",
         "subheading": "Restaurant-quality food and service delivered to your venue.",
         "section_height": "large",
-        "overlay_opacity": 0.6,
+        "overlay_opacity": 6,
         "btn_primary_text": "Request Catering",
         "btn_primary_url": "#catering-form",
         "btn_secondary_text": ""

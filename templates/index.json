@@ -8,7 +8,7 @@
         "subheading": "Experience thoughtfully prepared food, warm hospitality and unforgettable gatherings.",
         "btn_primary_text": "Book a Table",
         "btn_secondary_text": "Explore Menu",
-        "overlay_opacity": 0.55,
+        "overlay_opacity": 6,
         "text_align": "center",
         "section_height": "full"
       }

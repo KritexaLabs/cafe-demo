@@ -136,7 +136,7 @@
   </div>
 
   <!-- Overlay -->
-  <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | default: 0.55 }};"></div>
+  <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 10.0 | default: 0.55 }};"></div>
 
   <!-- Content -->
   <div class="hero__content hero__content--{{ align_class }}">
@@ -175,7 +175,6 @@
 {% schema %}
 {
   "name": "Hero",
-  "tag": "div",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Desktop image" },
     { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
@@ -187,7 +186,7 @@
     { "type": "url", "id": "btn_primary_url", "label": "Primary button URL" },
     { "type": "text", "id": "btn_secondary_text", "label": "Secondary button text", "default": "Explore Menu" },
     { "type": "url", "id": "btn_secondary_url", "label": "Secondary button URL" },
-    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0.2, "max": 0.9, "step": 0.05, "default": 0.55 },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 1, "max": 9, "step": 1, "default": 6 },
     { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value":"center","label":"Center"},{"value":"left","label":"Left"},{"value":"right","label":"Right"}], "default": "center" },
     { "type": "select", "id": "section_height", "label": "Section height", "options": [{"value":"full","label":"Full screen"},{"value":"large","label":"Large (85vh)"},{"value":"medium","label":"Medium (70vh)"}], "default": "full" }
   ],
